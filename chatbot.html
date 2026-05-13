@@ -12,6 +12,10 @@
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <!-- //react-dom.js connects react to webpage dom -->
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <!-- chatbot code -->
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
     <!-- //babel.js converts jsx into normal js -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
 
@@ -26,14 +30,28 @@
         }
 
         function sendMessage(){
-          setChatMessages([
+          const newChatMessages = [
             ...chatMessages,
             {
-              message: 'test',
+              message: inputText,
               sender: 'user',
               id: crypto.randomUUID(),
             }
+          ]
+
+          setChatMessages(newChatMessages);
+
+          const response = Chatbot.getResponse(inputText);
+          setChatMessages([
+            ...newChatMessages,
+            {
+              message: response,
+              sender: 'robot',
+              id: crypto.randomUUID(),
+            }
           ]);
+
+          setInputText('');
         }
         
         return (
@@ -43,6 +61,7 @@
               placeholder="Send a message to Chatbot"
               size="30"
               onChange={saveInputText}
+              value = {inputText}
             />
             <button
               onClick = {sendMessage}
