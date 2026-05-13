@@ -4,13 +4,20 @@
     <title>Chatbot</title>
   </head>
   <body>
+    <!-- //here entire react app gets inserted -->
     <div class="js-container"></div>
 
+    <!-- //react libraries -->
+    <!-- //react.js gives react features/components -->
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <!-- //react-dom.js connects react to webpage dom -->
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
-
+    <!-- //babel.js converts jsx into normal js -->
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <!-- //all the jsx is written here -->
     <script type="text/babel">
+      // a component is just a funtion that enters UI
       function ChatInput() {
         return (
           <>
@@ -23,10 +30,9 @@
           </>
         );
       }
-
+      //props (message, sender) are data passed from parent to child component
       function ChatMessage({ message, sender }) {
         /*
-        //here ChatMessage is a component
         //message and sender are the props object from which we are extracting value
         // const message = props.message;
         // const sender = props.sender;
@@ -44,6 +50,7 @@
          */
 
         return (
+          //conditional rendering
           <div>
             {sender === "robot" && <img src="robot-image.png" width="50" />}
             {message}
@@ -52,56 +59,107 @@
         );
       }
 
-      //all chatdata is saved in this component 
+      //all chatdata is saved in this component
       //and can be further used in app component
+      //each object represents one message
       function ChatMessages() {
-        const chatMessages = [
-         {
+        const array = React.useState([
+          {
             message: "hello chatbot",
             sender: "user",
             id: "id1",
-         },
-         {
+          },
+          {
             message: "Hello! How can I help you?",
             sender: "robot",
             id: "id2",
-         },
-         {
+          },
+          {
             message: "Can you get me todays date?",
             sender: "user",
             id: "id3",
-         },
-         {
+          },
+          {
             message: "Today is September 27",
             sender: "robot",
             id: "id4",
-         },];
+          },
+        ]);
+        const [chatMessages, setChatMessages] =  array;
 
-         function sendmsg(){
-            console.log('send msg');
-         }
+        
+        /*
+        const chatMessages = array[0]; // give current data/first value of array
+        const setChatMessages = array[1]; //second value is function that updates data
+        //if we use this function to update the data, react will update the html
+        //also known as updater function
+        */
+        /*
+        const chatMessages = [
+          {
+            message: "hello chatbot",
+            sender: "user",
+            id: "id1",
+          },
+          {
+            message: "Hello! How can I help you?",
+            sender: "robot",
+            id: "id2",
+          },
+          {
+            message: "Can you get me todays date?",
+            sender: "user",
+            id: "id3",
+          },
+          {
+            message: "Today is September 27",
+            sender: "robot",
+            id: "id4",
+          },
+        ];
+        */
+
+        function sendmsg() {
+          setChatMessages([
+            ...chatMessages,
+            {
+              message: 'test',
+              sender: 'user',
+              id: crypto.randomUUID(),
+            }
+          ]);
+
+          /*chatMessages.push({
+            message: "test",
+            sender: "user",
+            id: crypto.randomUUID(), //js code to generate unique id string
+          });
+          console.log(chatMessages);
+          */
+        }
 
         return (
-            <>
-               <button onClick = {sendmsg}>Send message</button>
-
-               {chatMessages.map((chatMessage) => {
-               //here ChatMessage is an object
-                  return (
-                     <ChatMessage
-                        message={chatMessage.message}
-                        sender={chatMessage.sender}
-                        key={chatMessage.id}
-                     />
-                  );
-               })}
-            </>
-         );
+          // here .map converts each message object into a chatMessage component
+          //here react uses key prop to track list items efficiently
+          //every item inside .map() should have a unique key
+          <>
+            <button onClick={sendmsg}>Send message</button>
+            {chatMessages.map((chatMessage) => {
+              //here ChatMessage is an object
+              return (
+                <ChatMessage
+                  message={chatMessage.message}
+                  sender={chatMessage.sender}
+                  key={chatMessage.id}
+                />
+              );
+            })}
+          </>
+        );
       }
 
-      //App is our main UI container
+      //App is our main component that renders ChatInput and ChatMessages
       //instead of variable we will use component to save our app
-      //message, sender, key are the props here
       function App() {
         /*
         const chatMessageComponents = chatMessages.map((chatMessage) => {
@@ -135,6 +193,7 @@
       );
       */
 
+      //react rendering
       const container = document.querySelector(".js-container");
       ReactDOM.createRoot(container).render(<App />);
     </script>
