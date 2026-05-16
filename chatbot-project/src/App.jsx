@@ -13,7 +13,6 @@ function App() {
       id: 'id1'
     }]
   );
-
   /*
   const [chatMessages, setChatMessages] = useState([{
     message: 'hello chatbot',
