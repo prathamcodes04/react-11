@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ChatMessage } from "./ChatMessage";
+import "./ChatMessages.css";
 
 function ChatMessages({ chatMessages }) {
   const chatMessagesRef = useRef(null);
@@ -18,8 +19,9 @@ function ChatMessages({ chatMessages }) {
           <ChatMessage
             message={chatMessage.message}
             sender={chatMessage.sender}
-            isLoading = {chatMessage.isLoading}
+            isLoading={chatMessage.isLoading}
             key={chatMessage.id}
+            time={chatMessage.time}
           />
         );
       })}
