@@ -5,6 +5,7 @@ import logo from "../../assets/images/logo.png";
 import { useEffect, useState } from "react";
 import { OrderSummary } from "./OrderSummary";
 import { PaymentSummary } from "./PayementSummary";
+import { CheckoutHeader } from "./CheckoutHeader";
 
 export function CheckoutPage({ cart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
@@ -27,28 +28,7 @@ export function CheckoutPage({ cart }) {
       <title>Checkout</title>
       <link rel="icon" type="image/svg+xml" href="cart-favicon.png" />
 
-      <div className="checkout-header">
-        <div className="header-content">
-          <div className="checkout-header-left-section">
-            <a href="/">
-              <img className="logo" src={logo} />
-              <img className="mobile-logo" src="images/mobile-logo.png" />
-            </a>
-          </div>
-
-          <div className="checkout-header-middle-section">
-            Checkout (
-            <a className="return-to-home-link" href="/">
-              3 items
-            </a>
-            )
-          </div>
-
-          <div className="checkout-header-right-section">
-            <img src="src/assets/images/icons/font-awesome-money-check.svg" />
-          </div>
-        </div>
-      </div>
+      <CheckoutHeader logo={logo} />
 
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
