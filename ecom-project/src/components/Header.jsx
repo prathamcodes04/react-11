@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import './header.css';
 import logoWhite from '../assets/images/logo-white.png';
 
-export function Header({cart}) {
+export function Header({cart = []}) {
 
   let totalQuantity = 0;
   cart.forEach((cartItem) => {
