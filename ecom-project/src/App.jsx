@@ -5,7 +5,7 @@ import { HomePage } from './pages/home/HomePage'
 import { CheckoutPage } from './pages/checkout/CheckoutPage'
 import { OrdersPage } from './pages/orders/OrdersPage';
 import { TrackingPage } from './pages/TrackingPage'
-import { NotFoundPage } from './pages/NotFoundPage'
+import { NotFoundPage } from './pages/pagenotfound/NotFoundPage'
 import './App.css'
 
 function App() {
