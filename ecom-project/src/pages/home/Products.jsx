@@ -4,6 +4,27 @@ import axios from "axios";
 
 export function Products({ product, loadCart }) {
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
+
+  const addToCart = async () => {
+    await axios.post("/api/cart-items", {
+      productId: product.id,
+      quantity,
+    });
+    await loadCart();
+
+    setAdded(true);
+
+    setTimeout(() => {
+      setAdded(false);
+    }, 2000)
+  };
+
+  const selectQuantity = (event) => {
+    const selectedQuantity = Number(event.target.value);
+    // console.log(selectedQuantity);
+    setQuantity(selectedQuantity);
+  };
 
   return (
     <div className="product-container">
@@ -26,14 +47,7 @@ export function Products({ product, loadCart }) {
       <div className="product-price">{formatMoney(product.priceCents)}</div>
 
       <div className="product-quantity-container">
-        <select
-          value={quantity}
-          onChange={(event) => {
-            const selectedQuantity = Number(event.target.value);
-            // console.log(selectedQuantity);
-            setQuantity(selectedQuantity);
-          }}
-        >
+        <select value={quantity} onChange={selectQuantity}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -49,21 +63,15 @@ export function Products({ product, loadCart }) {
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
+      <div className="added-to-cart"
+        style = {{opacity: added ? 1 : 0}}
+      >
         <img src="images/icons/checkmark.png" />
         Added
       </div>
 
-      <button
-        className="add-to-cart-button button-primary"
-        onClick={async () => {
-          await axios.post("/api/cart-items", {
-            productId: product.id,
-            quantity: 1,
-          });
-          await loadCart();
-        }}
-      >
+      <button className="add-to-cart-button button-primary" 
+        onClick={addToCart}>
         Add to Cart
       </button>
     </div>
