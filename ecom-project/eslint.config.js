@@ -17,6 +17,9 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
-    "react-hooks/set-state-in-effect": "off"
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+      "no-undef": "error",
+    }
   },
 ])
