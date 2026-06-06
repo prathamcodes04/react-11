@@ -9,7 +9,6 @@ import { ProductsGrid } from "./ProductsGrid";
 export function HomePage({ cart, loadCart }) {
   const [products, setProducts] = useState([]);
   const [searchParams] = useSearchParams();
-
   const search = searchParams.get('search');
 
   useEffect(() => {
