@@ -1,10 +1,20 @@
+import axios from "axios";
 import dayjs from "dayjs";
 import { Fragment } from "react";
 
-export function OrderDetailsGrid({order}) {
+export function OrderDetailsGrid({order, loadCart}) {
   return (
     <div className="order-details-grid">
       {order.products.map((orderProduct) => {
+        const addToCart = async() => {
+          await axios.post('/api/cart-items', {
+            productId: orderProduct.product.id,
+            quantity: 1
+          });
+
+          await loadCart();
+        }
+
         return (
           <Fragment key={orderProduct.product.id}>
             <div className="product-image-container">
@@ -25,7 +35,11 @@ export function OrderDetailsGrid({order}) {
                   className="buy-again-icon"
                   src="src/assets/images/icons/buy-again.png"
                 />
-                <span className="buy-again-message">Add to Cart</span>
+                <span className="buy-again-message" 
+                  onClick={addToCart}
+                >
+                  Add to 
+                </span>
               </button>
             </div>
 
