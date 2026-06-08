@@ -65,6 +65,8 @@ describe('Product Component', () => {
         )
 
         expect(loadCart).toHaveBeenCalledWith();
+
+        
     })
 })  
 
