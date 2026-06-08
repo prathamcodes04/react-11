@@ -67,7 +67,7 @@ export function PaymentSummary({paymentSummary, loadCart}) {
             data-testid = "place-order-button"
           >
             Place your order
-          </button>
+          </button> 
         </>
       )}
     </div>
