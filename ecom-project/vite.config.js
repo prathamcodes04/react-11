@@ -12,9 +12,10 @@ export default defineConfig({
       '/images': {
         target: 'http://localhost:3000'
       }
-    },
-    build: {
-      outDir: '../ecom-backend/dist'
     }
+  },
+  build: {
+    outDir: '../ecom-backend/dist'
   }
 })
+
