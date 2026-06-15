@@ -9,7 +9,7 @@ export function CartItemDetails({ cartItem, loadCart }) {
   const deleteCartItem = async() => {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
     await loadCart();
-  }
+  } 
 
   const updateQuantity = async() => {
     if(isUpdatingQuantity){
@@ -33,7 +33,7 @@ export function CartItemDetails({ cartItem, loadCart }) {
       updateQuantity();
     }else if(keyPressed === 'Escape'){
       setQuantity(cartItem.quantity);
-      isUpdatingQuantity(false);
+      setIsUpdatingQuantity(false);
     }
   }
 
