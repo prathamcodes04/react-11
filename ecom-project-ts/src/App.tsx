@@ -6,15 +6,14 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  count.toLowerCase();
 
-  const message = "hello";
-  console.log(message); 
+  const message = 'hello';
+  console.log(message);
 
-  message.toLowerCase();
-  message.toFixed();
+  message.toLocaleLowerCase();
+  // message.toFixed();
 
-  return ( 
+  return (
     <>
       <section id="center">
         <div className="hero">
