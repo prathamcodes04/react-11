@@ -1,9 +1,17 @@
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 import "./header.css";
 import logoWhite from "../assets/images/logo-white.png";
-import { useState } from "react";
+import { useState, ChangeEvent, MouseEvent } from "react";
 
-export function Header({ cart = [] }) {
+type HeaderProps = {
+  cart: {
+    productId: string;
+    quantity: number;
+    deliveryOptionId: string;
+  }[];
+}
+
+export function Header({ cart = [] }: HeaderProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -17,7 +25,7 @@ export function Header({ cart = [] }) {
     totalQuantity += cartItem.quantity;
   });
 
-  const updateSearchInput = (event) => {
+  const updateSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
@@ -25,7 +33,7 @@ export function Header({ cart = [] }) {
     navigate(`/?search=${search}`);
   };
 
-  const handleLogoClick = (event) => {
+  const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === "/") {
       event.preventDefault();
       window.location.reload();
